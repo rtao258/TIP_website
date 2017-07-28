@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Raymond's Website</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" href="icon.ico">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+	<body>
+		<header>
+			<h1 id="title">Raymond at Duke TIP</h1>
+			<nav>
+				<button type="button" onclick="window.location.assign('#Hangman');">Hangman</button>
+				<button type="button" onclick="window.location.assign('#TicTacToe');">Tic-Tac-Toe</button>
+				<button type="button" onclick="window.location.assign('#PacMan');">Pac-Man</button>
+				<button type="button" onclick="window.location.assign('#FinalProject');">Final Project</button>
+				<button type="button" onclick="window.location.assign('#Website');">Website</button>
+			</nav>
+		</header>
+		<a name="Hangman" class="anchor"></a>
+		<article id="first">
+			<h2>Hangman</h2>
+			<p>
+			The hangman project focused on basic elements of Python such as if/else statements and for loops. 
+			The goal was to build a functioning hangman game.
+			I wrote a Python module that can be used to make your own hangman game easily.
+			</p>
+			<p class="caption">The following Python code is part of the hangman module.</p>
+			<pre>
+@staticmethod
+def guess_char(parsed_chars, guess):
+    """ Modifies the parsed char list as necessary for a guessed character in the word """
+    correct = False
+    solved = True
+    # First, validate char
+    if not Text.validate_char(guess):
+        print("That's not a single letter! Try again.")
+        correct = True
+        return parsed_chars, correct
+    # Look for matching characters
+    for i in range(len(parsed_chars)):
+        char = parsed_chars[i][0]
+        if char == guess:
+            correct = True
+            parsed_chars[i][1] = True
+    # Check if all characters are guessed correctly
+    for char in parsed_chars:
+        if char[1] == False:
+            solved = False
+    if solved:
+        print("You solved the hangman puzzle!")
+    # Print a message to the console
+    elif correct:
+        print("\"{}\" is correct!".format(guess))
+    else:
+        print("\"{}\" is incorrect!".format(guess))
+    return parsed_chars, correct, solved			
+			</pre>
+		</article>
+		<a name="TicTacToe" class="anchor"></a>
+		<article>
+			<h2>Tic-Tac-Toe</h2>
+			<p>
+			The tic-tac-toe project focused on basic Python skills as well.
+			It was slightly harder.
+			I made my own GUI for the game, however, it wasn't working very smoothly.
+			</p>
+			<p class="caption">The following Python code was used in building the initial board.</p>
+			<pre>
+def init_board(screen, render, space, center=True):
+
+# First, define some local variables
+# Initialize the board which will hold the boxes
+board = [[],
+         [],
+         []]
+
+# Unpack the screen size tuple
+screen_x = screen.get_size()[0]
+screen_y = screen.get_size()[1]
+# Unpack render to get values needed to render identical boxes
+size = render[0]
+border = render[1]
+color = render[2]
+# Unpack the space tuple for spacing between boxes
+margin = space[0]
+padding = space[1]
+# Get offsets for proper centering if necessary
+if center:
+    table_width = 3 * size
+    x_offset = (screen_x - table_width)/2
+    y_offset = (screen_y - table_width)/2 + padding
+else:
+    x_offset = 0
+    y_offset = padding
+
+# Create the boxes and put them "on" the board
+for row in range(3):
+    for column in range(3):
+        x = row * (size + 10) + x_offset
+        y = column * (size + 10) + y_offset
+        board[row].append(Box(screen, (x, y), (size, border, color), (False, None)))
+print(board)
+return board
+			</pre>
+		</article>
+		<a name="PacMan" class="anchor"></a>
+		<article>
+			<h2>Pac-Man</h2>
+			<p>
+			The Pac-Man project focused on topics in computer science, particularly search algorithms.
+			The goal was to write an AI for Pac-Man to eat the dots.
+			This used two kinds of searching algorithms, Depth-First Search and Breadth-First Search.
+			</p>
+			<p class="caption">The following algorithm implemented in Python was used in both Depth-First Search and Breadth-First Search.</p>
+			<pre>
+def genericSearch(problem, structure):
+    fringe = structure();
+    expanded = set();
+    fringe.push((problem.getStartState(), [], 0));
+
+    while not fringe.isEmpty():
+        curState, curMoves, curCost = fringe.pop();
+
+        if (curState in expanded):
+            continue;
+
+        expanded.add(curState);
+
+        if problem.isGoalState(curState):
+            return curMoves;
+
+        for state, direction, cost in problem.getSuccessors(curState):
+            fringe.push((state, curMoves + [direction], curCost));
+    return [];
+			</pre>
+		</article>
+		<a name="FinalProject" class="anchor"></a>
+		<article>
+			<h2>Final Project</h2>
+			<p>
+			There were many options for the final project.
+			I chose to make a text adventure game.
+			This is going to be a challenge to code!
+			</p>
+			<pre>
+......
+			</pre>
+			<p class="caption">Error: code is still be written! Stay tuned!</p>
+		</article>
+		<a name="Website" class="anchor"></a>
+		<article id="last">
+			<h2>Website</h2>
+			<p>
+			This website is a showcase of my projects at the Modern Programming course at Duke TIP's Summer Studies Program at Georgia Tech, 2017.
+			This website was completely written from scratch with its own HTML and CSS.
+			This website is also fairly mobile-friendly; try changing the width of your browser and notice how everything resizes.
+			</p>
+			<p class="caption">This is the CSS that is used to format...itself!</p>
+			<pre>
+pre {
+	margin: 2vw auto;
+	padding: 2vw;
+	border-radius: 20px;
+	font-size: 1vw;
+	color: #FF8800;
+	background-color: rgba(32, 32, 32, 0.75);
+}
+
+@media only screen and (max-width: 800px) {
+	pre {
+		margin: 16px;
+		padding: 16px;
+		font-size: 6px;
+	}
+}
+			</pre>
+		</article>
+		<footer>
+			<p id="copyright">Copyright &copy 2017 Raymond Tao. All pictures copyright their respective owners.</p>
+		</footer>
+	</body>
+</html>
